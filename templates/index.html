@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+    <div>
+    <ul class="inputs-list">
+        <li>
+            <input id="fav_all" name="fav_all" type="checkbox" checked="true">
+            <label for="fav_all">All</label>
+        </li>
+        <li>
+            <input id="fav_twitter" name="fav_twitter" type="checkbox">
+            <label for="fav_twitter">Twitter</label>
+        </li>
+        <li>
+            <input id="fav_greader" name="fav_greader" type="checkbox">
+            <label for="fav_greader">Google Reader</label>
+        </li>
+    </ul>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <table class="zebra-striped">
+        {% for twit in twits %}
+        <tr>
+            <td>
+                <a class="unfaforite_twit" href="#">
+                    <img src="https://si0.twimg.com/images/dev/cms/intents/icons/favorite_on.png" alt="Unfavorite">
+                </a>
+            </td>
+            <td>
+                <a href="https://twitter.com/{{ twit.author.screen_name }}">
+                <img class="thumbnail" src="{{ twit.author.profile_image_url}}" alt="{{ twit.author.name }}">
+
+                {{ twit.author.name }}</a>
+            </td>
+            <td>
+                <div>
+                    {{ twit.text|safe }}
+                </div>
+                <div>
+                    <a href="https://twitter.com/{{ twit.author.screen_name }}/status/{{ twit.id_str }}" target="_blank">
+                        View original
+                    </a>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="3">
+                <button class="btn">Load more</button>
+            </td>
+        </tr>
+    </table>
+{% endblock %}
