@@ -5,7 +5,7 @@ class BaseApiWrapper(object):
     def favorites(self, page=1):
         pass
 
-    def unfavorite(self):
+    def unfavorite(self, id):
             pass
 
 
@@ -36,6 +36,9 @@ class TwitterApiWrapper(BaseApiWrapper):
                 twit.text = re.sub(regexp, self.__update_link_html__, twit.text)
                 twits.append(twit)
         return twits
+
+    def unfavorite(self, id):
+        self.api.destroy_favorite(id)
 
     def __update_link_html__(self, s):
         g = s.group()

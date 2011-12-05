@@ -15,6 +15,14 @@ def index():
 
 @app.route('/unfavorite')
 def unfavorite():
+    wrapper = TwitterApiWrapper(
+            app.config['TWITTER_CONSUMER_KEY'],
+            app.config['TWITTER_CONSUMER_SECRET'],
+            app.config['TWITTER_ACCESS_TOKEN'],
+            app.config['TWITTER_ACCESS_TOKEN_SECRET'])
+    id = request.args.get('id', '')
+    if id:
+        wrapper.unfavorite(id)
     return jsonify(result='ok')
 
 if __name__ == '__main__':
