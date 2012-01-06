@@ -40,6 +40,9 @@ class TwitterApiWrapper(BaseApiWrapper):
     def unfavorite(self, id):
         self.api.destroy_favorite(id)
 
+    def retweet(self, id):
+        self.api.retweet(id=id)
+
     def __update_link_html__(self, s):
         g = s.group()
         return '<a href="%s" target="_blank">%s</a>' % (g, g)

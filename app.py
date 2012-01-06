@@ -25,6 +25,18 @@ def unfavorite():
         wrapper.unfavorite(id)
     return jsonify(result='ok')
 
+@app.route('/retweet')
+def retweet():
+    wrapper = TwitterApiWrapper(
+            app.config['TWITTER_CONSUMER_KEY'],
+            app.config['TWITTER_CONSUMER_SECRET'],
+            app.config['TWITTER_ACCESS_TOKEN'],
+            app.config['TWITTER_ACCESS_TOKEN_SECRET'])
+    id = request.args.get('id', '')
+    if id:
+        wrapper.retweet(id)
+    return jsonify(result='ok')
+
 if __name__ == '__main__':
     app.debug = True
     app.config.from_object('config.twitter.TwitterConfig')
