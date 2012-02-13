@@ -10,7 +10,7 @@
                   <ul class="nav">
                     <li class="active"><a href="#">Home</a></li>
                     <li><a href="#">Settings</a></li>
-                    <li><a href="#">Sign Out</a></li>
+                    <li><a href="/logout/twitter">Sign Out</a></li>
                   </ul>
                   <form class="pull-left" action="">
                     <input type="text" placeholder="Search" />
@@ -48,21 +48,25 @@
                     </a>
                     <br/>
                     <a href="#">
-                        <img class="retweet_twit" src="https://si0.twimg.com/images/dev/cms/intents/icons/retweet.png" alt="Unfavorite" title="Retweet">
+                        {% if twit.retweeted %}
+                            <img class="undo_retweet_twit" src="{{ url_for('static', filename='img/twitter/retweet_on.png') }}" alt="Undo Retweet">
+                        {% else %}
+                            <img class="retweet_twit" src="{{ url_for('static', filename='img/twitter/retweet.png') }}" alt="Unfavorite" title="Retweet">
+                        {% endif %}
                     </a>
                 </td>
                 <td>
-                    <a href="https://twitter.com/{{ twit.author.screen_name }}">
-                    <img class="thumbnail" src="{{ twit.author.profile_image_url}}" alt="{{ twit.author.name }}" title="{{ twit.author.name }}">
+                    <a href="https://twitter.com/{{ twit.user.screen_name }}">
+                    <img class="thumbnail" src="{{ twit.user.profile_image_url}}" alt="{{ twit.user.name }}" title="{{ twit.user.name }}">
 
-                    @{{ twit.author.screen_name }}</a>
+                    @{{ twit.user.screen_name }}</a>
                 </td>
                 <td>
                     <div>
                         {{ twit.text|safe }}
                     </div>
                     <div>
-                        <a href="https://twitter.com/{{ twit.author.screen_name }}/status/{{ twit.id_str }}" target="_blank">
+                        <a href="https://twitter.com/{{ twit.user.screen_name }}/status/{{ twit.id_str }}" target="_blank">
                             View original
                         </a>
                     </div>
